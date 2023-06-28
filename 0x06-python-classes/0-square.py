@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+# 0-square.py by Abdesslam Mekouar
+"""Defines a square """
+
+
 class Square:
-    """Empty class that defines a square"""
+    """Does nothing"""
     pass
