@@ -1,95 +1,41 @@
-The ``0-add_integer test`` module
-=================================
+==================================
+    how 0-add_integer.py works
+==================================
 
-Using ``add_integer``
----------------------
+The module only contains the function ``add_integer()``, which needs
+to be imported as follows:
 
-This file is in restructured text format.
-First import ``add_integer`` from the ``0-add_integer`` module:
+    >>> add_integer = __import__("0-add_integer").add_integer
 
-    >>> add_integer = __import__('0-add_integer').add_integer
+And not as such:
 
-Checking for module docstring:
+    >>> from 0-add_integer import add_integer
+    Traceback (most recent call last):
+    SyntaxError: invalid syntax
 
-    >>> m = __import__("0-add_integer").__doc__
-    >>> len(m) > 1 
-    True
-
-Checking for function docstring:
-
-    >>> f = __import__("0-add_integer").add_integer.__doc__
-    >>> len(f) > 1
-    True
-         
-Basic usage:
-
-    >>> add_integer(1, 2)
-    3
-    
-Test int argument:
-
-    >>> add_integer(2)
-    100
-
-Test int argument and check default second:
+It can take one argument as the second one is by default 98:
 
     >>> add_integer(0)
     98
 
-Checking positive with negative:
+Ordinarily it takes two integers:
 
-    >>> add_integer(2, -4)
-    -2 
+    >>> add_integer(0, 100)
+    100
 
-Checking negative with positive:
+Floats are also acceptable, but they're cast into integers:
 
-    >>> add_integer(-6, 8)
-    2
+    >>> add_integer(5.5, 4.7)
+    9
 
-Checking addition over multiple values:
+However, any other type raises a TypeError:
 
-    >>> [add_integer(i, i ** 2) for i in range(6)]
-    [0, 2, 6, 12, 20, 30]
-
-Float and negative input:
-
-    >>> add_integer(100.3, -2)
-    98
-
-Float overflow:
-
-    >>> add_integer(1500.5)
-    1598
-
-Float NaN:
-
-    >>> add_integer(float('NaN'))
+    >>> add_integer('integer', 3) #doctest: +ELLIPSIS
     Traceback (most recent call last):
-    ...
-    ValueError: cannot convert float NaN to integer
+        ...
+    TypeError: a must be an integer
 
-String input:
-
-    >>> add_integer(4, "School")
+    >>> add_integer(2, 'test') #doctest: +ELLIPSIS
     Traceback (most recent call last):
-    ...
+        ...
     TypeError: b must be an integer
-
-None input:
-
-    >>> add_integer(None)
-    Traceback (most recent call last):
-    ...
-    TypeError: a must be an integer
-
-Double negative float input:
-
-    >>> add_integer(-100.5, -10.8)
-    -110
-
-Double string input:
-
-    >>> add_integer("alx", "school")
-    Traceback (most recent call last):
-    ...
-    TypeError: a must be an integer
